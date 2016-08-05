@@ -1,7 +1,0 @@
-<?php
-function drupal_responsive_data_table_init(){
-    $path = drupal_get_path('module', 'drupal_responsive_data_table');
-    drupal_add_js($path . '/drupal_responsive_data_table.js');
-    drupal_add_css($path.'/drupal_responsive_data_table.css');
-}
-?>

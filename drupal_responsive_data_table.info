@@ -1,6 +1,0 @@
-name = Drupal Responsive Data Tables
-description = Attempts to make tables responsive (http://css-tricks.com/responsive-data-tables/)
-core = 7.x
-files[] = drupal_responsive_data_table.module
-files[] = drupal_responsive_data_table.js
-files[] = drupal_responsive_data_table.css
