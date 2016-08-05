@@ -15,19 +15,28 @@ jQuery(document).ready(function() {
         }
         //TODO is there an edge case where we have fewer header cells than body cells?
         else{
-            jQuery(this).addClass('responsive');
             headerRowCells = headerRow.find('td, th');
-            jQuery(this).find('tbody tr').each(function(){
-                jQuery(this).find('td').each(function(index){
-                    //If there's no text displaying, add a space. This might make pictures a little wonky.
-                    if(jQuery(this).text() == "")
-                        jQuery(this).html("&nbsp;");
-                    if(jQuery(this).attr('colspan') > 1 || jQuery(headerRowCells[index]).attr('colspan') > 1)
-                        jQuery(this).attr('data-title','');
-                    else
-                        jQuery(this).attr('data-title', stripTags(headerRowCells[index].innerHTML));
-                });
+            var maxSpan = 0;
+            headerRowCells.each(function(){
+                if(jQuery(this).attr('colspan') > maxSpan)
+                    maxSpan = jQuery(this).attr('colspan');
             });
+            if(maxSpan > 1)
+                jQuery(this).addClass('non-responsive');       
+            else {
+                jQuery(this).addClass('responsive');
+                jQuery(this).find('tbody tr').each(function(){
+                    jQuery(this).find('td').each(function(index){
+                        //If there's no text displaying, add a space. This might make pictures a little wonky.
+                        if(jQuery(this).text() == "")
+                            jQuery(this).html("&nbsp;");
+                        if(jQuery(this).attr('colspan') > 1)
+                            jQuery(this).attr('data-title','');
+                        else
+                            jQuery(this).attr('data-title', stripTags(headerRowCells[index].innerHTML));
+                    });
+                });
+            }
         }
     });
     //Most of this is so that we don't need to rely on media queries, since some
